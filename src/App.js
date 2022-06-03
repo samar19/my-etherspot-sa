@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useEffect, useState } from "react";
+import { fetchData } from "./helpers";
 
 function App() {
+  const [address, setAddress] = useState("0x");
+  useEffect(() => {
+    const promise = fetchData();
+    promise.then((data) => {
+      setAddress(data.user);
+    });
+  }, []);
+
+ 
+  
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <div className="container mx-auto px-6 sm:px-12 flex items-center justify-end">
+        <div>
+            <button
+            class="btn btn-primary"
+            type="button">connect
+           </button>
+        </div>
+        </div>
+      <p>{address}</p>
       </header>
     </div>
+ 
   );
 }
 

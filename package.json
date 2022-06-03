@@ -12,14 +12,18 @@
     "axios": "^0.27.2",
     "chai": "^4.3.6",
     "ethereum-waffle": "^3.4.4",
-    "ethers": "^5.6.8",
+    "ethers": "^5.0.8",
+    "etherspot": "^1.33.2",
     "hardhat": "^2.9.7",
     "ipfs-http-client": "^57.0.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-scripts": "5.0.1",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^6.6.2",
     "web-vitals": "^2.1.4",
-    "web3modal": "^1.9.7"
+    "web3modal": "^1.9.7",
+    "ws": "^8.7.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -44,5 +48,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.7",
+    "postcss": "^8.4.14",
+    "tailwindcss": "^3.0.24"
   }
 }
