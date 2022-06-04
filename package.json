@@ -14,6 +14,7 @@
     "ethereum-waffle": "^3.4.4",
     "ethers": "^5.0.8",
     "etherspot": "^1.33.2",
+    "etherspot-react-wallet": "^0.0.2",
     "hardhat": "^2.9.7",
     "ipfs-http-client": "^57.0.1",
     "react": "^18.1.0",

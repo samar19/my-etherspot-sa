@@ -1,4 +1,42 @@
 import { Sdk, MetaMaskWalletProvider } from 'etherspot';
+import detectEthereumProvider from '@metamask/detect-provider';
+
+import { ethers } from 'ethers'
+import { useState } from 'react';
+
+
+
+
+export const ConnectComponent = ({ text }: Props) => {
+  const ethereum = window.ethereum
+const [account, setAccount] = useState('👻👻👻👻👻👻👻👻👻👻👻👻');
+// install metamask
+const iMetamask = async () => {
+  const provider = await detectEthereumProvider();
+  if (provider) {
+    console.log(provider)
+    startApp(provider); 
+  } else {
+    console.log('Please install MetaMask!');
+  }
+}
+
+const startApp = async (provider: ant) => {
+  const library = new ethers.providers.Web3Provider(provider)
+  const signer = library.getSigner()
+  try {
+    const addr = await signer.getAddress()
+    console.log(addr)
+    console.log('signer ', signer)
+    setAccount(addr)
+  }
+  catch (ex) {
+    console.log(ex);
+  }
+}
+
+
+
 
 async function main() {
   if (!MetaMaskWalletProvider.detect()) {
@@ -14,17 +52,29 @@ async function main() {
 
   console.info('SDK created');
 }
-
 main().catch(console.error);
 
 
-export async function fetchData() {
-    return new Promise((resolve, reject) => {
-      try {
-        const data = { user: "samar" };
-        resolve(data);
-      } catch (error) {
-        reject("error");
-      }
-    });
+
+
+
+
+
+const connectMetamask = async () => {
+  console.log('Start metamask ')
+  const accounts = await ethereum.request({ method: 'eth_request' });
+  const account = accounts[0];
+  console.log('account ', account)
+  setAccount(account)
+}
+
+
+ function fetchData() {
+  return <div>
+   
+    <button type="button" onClick={connectMetamask}>
+    connect 
+    </button>
+  </div>
   }
+}
