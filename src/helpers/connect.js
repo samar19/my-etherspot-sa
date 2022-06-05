@@ -27,13 +27,3 @@ export const connectMetamask = async (
 };
 
 
-export async function fetchData() {
-  return new Promise((resolve, reject) => {
-    try {
-      const data = { user: "samar" };
-      resolve(data);
-    } catch (error) {
-      reject("error");
-    }
-  });
-}

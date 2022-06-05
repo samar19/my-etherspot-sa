@@ -1,7 +1,6 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import { connectMetamask } from "./helpers";
-import { fetchData } from "./helpers";
 const { DEFAULT_NETWORK, BANNER } = require("./.secret.json");
 
 
@@ -12,16 +11,10 @@ const MyApp = ({ Component, pageProps }) => {
   const [correctNetwork, setCorrectNetwork] = useState(false);
   const [connectted, setConnectted] = useState(false);
   const [hasMetamask, setHasMetamask] = useState(false);
+  const [address, setAddress] = useState("");
   
 
-  function App() {
-    const [address, setAddress] = useState("0x");
-    useEffect(() => {
-      const promise = fetchData();
-      promise.then((data) => {
-        setAddress(data.user);
-      });
-    }, []);
+
 
   function accountChanged(_accounts) {
     // Time to reload your interface with accounts[0]!
@@ -107,5 +100,5 @@ const MyApp = ({ Component, pageProps }) => {
     </div>
   );
 }
-}
+
 export default MyApp;
