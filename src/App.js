@@ -49,13 +49,13 @@ const MyApp = ({ Component, pageProps }) => {
 
   return (
     <div className="App">
-      <header className="App-header">
+      
 
       {!correctNetwork && `${BANNER} `}
       {!connectted && hasMetamask && (
                   <div>
                     <button
-                      class="btn btn-primary"
+                      className="btn btn-primary"
                       type="button"
                       onClick={connect}
                     >
@@ -74,7 +74,7 @@ const MyApp = ({ Component, pageProps }) => {
                   <>
                     <a
                       href="/"
-                      class="btn btn-primary"
+                      className="btn btn-primary"
                     >
                       connect
                     </a>
@@ -88,7 +88,7 @@ const MyApp = ({ Component, pageProps }) => {
                           >
                             Metamask 
                           </a>
-                          <a href="/" class="btn">
+                          <a href="/" className="btn">
                             Cancel
                           </a>
                         </div>
@@ -96,7 +96,7 @@ const MyApp = ({ Component, pageProps }) => {
                     </div>
                   </>
                 )}
-      </header>
+    
     </div>
   );
 }
