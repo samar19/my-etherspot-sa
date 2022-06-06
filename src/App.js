@@ -1,104 +1,39 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import { connectMetamask } from "./helpers";
-const { DEFAULT_NETWORK, BANNER } = require("./.secret.json");
+import { startSdk } from "./helpers";
+import { getAccountBalances } from "./helpers/getbalance";
 
+function App() {
+  const [address, setAddress] = useState("0x");
+  const [balance, getBalance] = useState("0x");
 
+  useEffect(() => {
+    startSdk().then((sdk) => {
+      if (sdk) {
+        const { state } = sdk;
+        setAddress(state.state$._value.wallet.address);
+      }
+      
+    });
+    getAccountBalances().then((sdk) => {
+      if (sdk) {
+        const { state } = sdk;
+        getBalance(state.state$._value.wallet.address);
+      }
+      
+    });
+    
+  }, []);
 
-
-const MyApp = ({ Component, pageProps }) => {
-  const [, setNetwork] = useState("");
-  const [correctNetwork, setCorrectNetwork] = useState(false);
-  const [connectted, setConnectted] = useState(false);
-  const [hasMetamask, setHasMetamask] = useState(false);
-  const [address, setAddress] = useState("");
-  
-
-
-
-  function accountChanged(_accounts) {
-    // Time to reload your interface with accounts[0]!
-    setAddress(_accounts.length >= 1 ? _accounts[0] : "no account");
-  }
-
-  function networkChanged(_chainId) {
-    // Time to reload your interface with the new networkId
-    setNetwork(_chainId);
-    setCorrectNetwork(_chainId === DEFAULT_NETWORK ? true : false);
-  }
-
-
-
-  const connect = async () => {
-    const { address, network } = await connectMetamask(
-      accountChanged,
-      networkChanged
-    );
-    if (address === "no account" || address === "no metamask") {
-    } else {
-      setNetwork(network);
-      setAddress(address);
-      setConnectted(true);
-      setHasMetamask(true);
-    }
-    setCorrectNetwork(network === DEFAULT_NETWORK ? true : false);
-    if (correctNetwork) {
-      console.log("correct network", network);
-    }
-  };
 
   return (
     <div className="App">
-      
-
-      {!correctNetwork && `${BANNER} `}
-      {!connectted && hasMetamask && (
-                  <div>
-                    <button
-                      className="btn btn-primary"
-                      type="button"
-                      onClick={connect}
-                    >
-                      connect 
-                    </button>
-                  </div>
-                )}
-              {connectted && correctNetwork && (
-                  <div>
-                    <p>{address}</p>
-                  </div>
-                )}
-
-
-                {!hasMetamask && (
-                  <>
-                    <a
-                      href="/"
-                      className="btn btn-primary"
-                    >
-                      connect
-                    </a>
-                    <div>
-                      <div >
-                        <p>Please install Metamask</p>
-                        <div >
-                          <a
-                            href="https://metamask.io/"
-                            
-                          >
-                            Metamask 
-                          </a>
-                          <a href="/" className="btn">
-                            Cancel
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </>
-                )}
-    
+      <header className="App-header">
+        <p>{address}</p>
+        <p>{balance}</p>
+      </header>
     </div>
   );
 }
 
-export default MyApp;
+export default App;
