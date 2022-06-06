@@ -1,9 +1,8 @@
 import { Sdk, Env, MetaMaskWalletProvider } from "etherspot";
 
-Env.defaultName = "testnet";
+Env.defaultName = "testnets";
 
 // get balance
-
 export async function getAccountBalances() {
     const walletProvider = await MetaMaskWalletProvider.connect();
     const sdk = new Sdk(walletProvider);

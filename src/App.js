@@ -25,12 +25,11 @@ function App() {
     
   }, []);
 
-
   return (
     <div className="App">
       <header className="App-header">
-        <p>{address}</p>
-        <p>{balance}</p>
+        <p> Address is : {address}</p>
+        <p> Get Balance is : {balance}</p>
       </header>
     </div>
   );
